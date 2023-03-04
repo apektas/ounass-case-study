@@ -1,0 +1,25 @@
+# Byte-compiled / optimized
+.DS_Store
+.idea/
+__pycache__/
+*.py[cod]
+settings.py
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+*.egg-info/
+.installed.cfg
+*.egg
+notes
