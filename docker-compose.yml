@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  db:
+    container_name: ounass_db
+    image: postgres:latest
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: ounass
+      POSTGRES_PASSWORD: ounass
+      POSTGRES_USER: postgres
+    volumes:
+      - ounass_db_volume:/var/lib/postgresql/data
+
+  backend:
+    container_name: api
+    restart: always
+    depends_on:
+      - db
+    build: 
+      context: ./backend/
+      dockerfile: ./Dockerfile
+    image: ounass/api
+    ports:
+      - '8080:8080'
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: ounass
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ounass
+    links:
+      - db
+
+volumes:
+  ounass_db_volume:
+    driver: local

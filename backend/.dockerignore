@@ -1,0 +1,7 @@
+ .DS_Store
+ .idea
+ .dockerignore
+__pycache__
+Dockerfile
+env
+notes
