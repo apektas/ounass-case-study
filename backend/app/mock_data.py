@@ -7,6 +7,6 @@ insights = {
     "spend": "100.50",
     "publisher_platform": "instagram",
     "platform_position": "instagram_explore_grid_home",
-    "clicks": "1000",
+    "clicks": "10",
 }
 

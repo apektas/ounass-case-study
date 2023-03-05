@@ -73,7 +73,7 @@ class AdModel(BaseModel):
     id: Optional[str] = None
     name: Optional[str] = 'My Ad [Abdurrahman Pektas]'
     adset_id: Optional[str] = '120330000113645409'
-    creative: Optional[CreativeModel] =None
+    creative: Optional[CreativeModel]
     status: str = 'PAUSED'
 
     class Config:

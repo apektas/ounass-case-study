@@ -14,7 +14,7 @@ headers["Authorization"] = f"Bearer {ACCESS_TOKEN}"
 router = APIRouter()
 
 
-@router.get('/')
+@router.get('/{ad_set_id}')
 async def insights(ad_set_id: str, db: Session = Depends(get_db_session)):
     # get insights directly from Facebook - results might be too long think about pagination !!!
     # interested about impression and clicks

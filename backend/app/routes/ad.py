@@ -34,7 +34,7 @@ async def get_ad(ad_id: str, db: Session = Depends(get_db_session)):
 @router.post('/')
 async def create_ad(ad_model: AdModel, db: Session = Depends(get_db_session)):
     FacebookAdsApi.init(APP_ID, APP_SECRET, ACCESS_TOKEN, debug=False)
-    fields = ['name', 'id', 'status', 'campaign_id', 'campaign', 'creative', 'status']
+    fields = ['name', 'id', 'status', 'campaign_id', 'campaign', 'creative', 'status', 'adset_id']
     _ad = AdAccount(ACCOUNT_ID).create_ad(fields=fields, params=ad_model.dict(exclude={'id'}))
     # _campaign = Campaign(campaign_model.id).api_get(fields=fields)
     _campaign = AdModel.parse_obj(_ad)

@@ -1,6 +1,7 @@
 from facebook_business.adobjects.adaccount import AdAccount
 from facebook_business.adobjects.campaign import Campaign
 from facebook_business.adobjects.adset import AdSet
+from facebook_business.adobjects.ad import Ad
 from facebook_business.api import FacebookAdsApi
 
 from app.config import APP_ID, APP_SECRET, ACCOUNT_ID, ACCESS_TOKEN, PAGE_ID
@@ -92,9 +93,10 @@ params = {
 params = {
   'effective_status': ['ACTIVE', 'PAUSED'],
 }
-
+fields = ['name', 'id', 'status', 'campaign_id', 'campaign', 'adset_id', 'creative', 'status']
 # remote_delete
 # AdSet('120330000113536709').api_delete()
 # NOTE: set status as deleted once api_delete is executed 120330000113546509
-remote_campaign = AdSet('120330000113546509').api_get(fields=fields, params=params)
+# remote_campaign = AdSet('120330000113546509').api_get(fields=fields, params=params)
+remote_campaign = Ad('120330000113676809').api_get(fields=fields)
 print(remote_campaign)
