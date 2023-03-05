@@ -2,16 +2,11 @@ import logging
 from functools import lru_cache
 from fastapi import FastAPI, Depends, status
 from starlette.responses import RedirectResponse
-# from dotenv import load_dotenv
-# load_dotenv(".env")
-from app.models import CampaignModel, AdCreativeModel, AdSetModel
-from typing import List
+from fastapi.responses import JSONResponse
 import uvicorn
 from app.config import Settings
 from app.routes import ad_creative, campaign, insight, adset, preview, ad
-from app.database import get_db_session
-from app import db_models
-from app.database import SessionLocal, Base
+from facebook_business.exceptions import FacebookError, FacebookRequestError
 from app import db_models, database
 from app import models
 
@@ -44,6 +39,14 @@ app.include_router(campaign.router, tags=['Campaign'], prefix='/api/campaign')
 app.include_router(adset.router, tags=['Ad Set'], prefix='/api/adset')
 app.include_router(ad_creative.router, tags=['Ad Creative'], prefix='/api/adcreative')
 app.include_router(ad.router, tags=['Ad'], prefix='/api/ad')
+
+
+@app.exception_handler(FacebookError)
+async def facebook_request_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=exc.http_status(),
+        content={"message": exc.body()},
+    )
 
 
 async def get_settings():

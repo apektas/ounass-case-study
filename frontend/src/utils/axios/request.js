@@ -3,7 +3,7 @@ import {NotificationManager} from "react-notifications";
 import {showLoading} from "react-global-loading";
 
 const axiosClient = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL || "http://192.168.1.104:8080", //"http://127.0.0.1:1880",
+    baseURL: process.env.API_BASE_URL || "http://192.168.1.104:8080", //"http://127.0.0.1:1880",
     timeout: 60000
 });
 
@@ -51,7 +51,12 @@ export const apiRequest = (method, url, params, body, notificationText) => {
                 console.log(error);
                 console.log(error.request);
             }
-            let message = error.request?.responseURL + " " + error.message ;
+            let message = "";
+            if(error.response?.data?.message?.error?.error_user_msg !== undefined) {
+                message = error.response?.data?.message?.error?.error_user_msg;
+            } else {
+                message = error.request?.responseURL + " " + error.message ;
+            } 
             let title = "Something went wrong!";
             if(error.response !== undefined) {
                 title = error.response?.status + " " +error.response?.statusText;

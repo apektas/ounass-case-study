@@ -5,7 +5,7 @@ import {navbarItems} from "../../utils/Constants"
 const { Header} = Layout;
 const Navbar = (props) => {
     const navigate = useNavigate();
-    const [current, setCurrent] = useState('home');
+    const [current, setCurrent] = useState('campaign');
     const menuOnClick = (e) => {
         setCurrent(e.key);
         navigate(navbarItems.find(item => item.key === e.key).url || "/");
