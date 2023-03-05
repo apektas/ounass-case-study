@@ -21,7 +21,7 @@ services:
     build: 
       context: ./backend/
       dockerfile: ./Dockerfile
-    image: ounass/api
+    image: ounass-api:1.0.0
     ports:
       - '8080:8080'
     environment:
@@ -33,6 +33,24 @@ services:
     links:
       - db
 
+  frontend:
+    container_name: frontend
+    restart: always
+    image: ounass-frontend:1.0.0
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+    build: 
+      context: ./frontend/
+      dockerfile: ./Dockerfile
+    environment:
+      API_BASE_URL: 'http://backend:8080'
+
 volumes:
   ounass_db_volume:
     driver: local
+
+
+
+
